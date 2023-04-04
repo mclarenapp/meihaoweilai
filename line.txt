@@ -6,7 +6,7 @@ JsonpData({
         },
         {
             "title":"*B线路-备用线路",
-            "host":"https://mhwl-a.youma8.com"
+            "host":"https://mhwl-b.youma8.com"
         }
     ]
 })
