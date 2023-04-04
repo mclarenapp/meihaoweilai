@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -54,13 +55,13 @@
                 $.ajax({
                     type: "get",
                     cache: false,
-                    url: selectLine + "/Api/ApiWeb/LoginCheckStateCb",
+                    url: selectLine + "/Api/ApiWeb/LoginCheckStateCb?token=" + getCookie('auth'),
                     dataType: "jsonp",
                     jsonp: 'cb',
                     success: function (data) {
                         if (data.Code == 1) {
                             $("main").hide();
-                            $("iframe").attr("src", selectLine + '/User').show();
+                            $("iframe").attr("src", selectLine).show();
                         }
                     }
                 });
@@ -79,7 +80,7 @@
         function enter(obj) {
             var domainLines = $("#domainLines");
             var selectLine = domainLines.val();
-            addCookie('selline', selectLine, 240, "", "");
+            addCookie('selline', selectLine, 0, "", "");
             $("main").hide();
             $("iframe").attr("src", selectLine).show();
         }
@@ -112,6 +113,11 @@
                 str += "; path=" + objPath;
             }
             document.cookie = str;
+        }
+        window.onload = function() {
+            window.addEventListener('message', function (e) {
+                addCookie('auth', e.data, 0, "", "");
+            });
         }
     </script>
 </body>
